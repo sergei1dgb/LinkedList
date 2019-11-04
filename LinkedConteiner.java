@@ -34,6 +34,7 @@ public class LinkedConteiner<E> implements Functions<E> {
         s.remove(1);
         s.remove("Sasha54323423");
         s.add("Sasha5");
+        s.add("Sergo");
         for(int i=0; i<s.size(); i++) {
             System.out.println(s.getElemById(i) + " " + i);
         }
@@ -127,7 +128,7 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public  E getElemById(int i) {
-        LinkedList<E> target = first.getNext();
+        LinkedList<E> target =  first.getNext();
           for(int j = 0; j<i; j++){
             target = target.getNext();
         }

@@ -5,9 +5,9 @@ public interface Functions<E> {
     public void add(E element);
     public void addFirst(E element);
     public void addMiddle(int i, E element);
-    public void remove(int i);
+    public <E> void remove(int i);
     public void remove(E i);
-    public  E getElemById(int i);
-    public  LinkedList<E> getClassById(int i);
+    public <E> E getElemById(int i);
+    public <E>  LinkedList<E> getClassById(int i);
     public int size();
 }
