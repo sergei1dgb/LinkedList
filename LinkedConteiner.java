@@ -39,15 +39,15 @@ public class LinkedConteiner<E> implements Functions<E> {
             System.out.println(s.getElemById(i) + " " + i);
         }
         s.remove(-1);
-//        s.clear();
-//        for (int i = 0; i < s.size(); i++) {
-//            System.out.println(s.getElemById(i) + " " + i);
-//        }
-//        if (s.size() == 0) {
-//            System.out.println("__________________");
-//            System.out.println("Size of list = " + s.size());
-//            System.out.println("The list is cleared");
-//        }
+        s.clear();
+        for (int i = 0; i < s.size(); i++) {
+            System.out.println(s.getElemById(i) + " " + i);
+        }
+        if (s.size() == 0) {
+            System.out.println("__________________");
+            System.out.println("Size of list = " + s.size());
+            System.out.println("The list is cleared");
+        }
     }
 
     @Override
@@ -97,7 +97,7 @@ public class LinkedConteiner<E> implements Functions<E> {
         }
 
         else if(size()!=0 && i>0 && i<size()){
-            node = new LinkedList<E>(getClassById(i-1), element, getClassById(i));
+            node = new LinkedList<E>(getClassById(i).getPrev(), element, getClassById(i));
             node.getPrev().setNext(node);
             node.getNext().setPrev(node);
             count++;
@@ -106,28 +106,32 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public void remove(int i) {
-         if(i==size()){
+         if(i==size()|| i<0){
             System.out.println("This element doesn`t exists");
+            return;
         }
         else if(size()>0 && i<size()){
             node = getClassById(i);
-            getClassById(i-1).setNext(node.getNext());
-            node.getNext().setPrev(getClassById(i-1));
+            node.getPrev().setNext(node.getNext());
+            node.getNext().setPrev(node.getPrev());
             count--;
         }
     }
 
     @Override
     public void remove(E i) {
+        E s=null;
         if(size()>0){
            for(int j = 0; j<size(); j++){
                if(getElemById(j).equals(i)) {
+                   s = getElemById(j);
                    remove(j);
                    j--;
                }
            }
-            System.out.println("This element doesn`t exist");
         }
+        if(s==null)
+            System.out.println("The element doesn`t exist");
     }
 
     @Override
