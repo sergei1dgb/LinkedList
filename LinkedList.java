@@ -1,9 +1,9 @@
 
 
 public class LinkedList<E> {
-    E element;
-    LinkedList<E> prev;
-    LinkedList<E> next;
+    private E element;
+    private LinkedList<E> prev;
+    private LinkedList<E> next;
 
     public LinkedList(LinkedList<E> prev, E element, LinkedList<E> next){
         this.element = element;
@@ -11,9 +11,7 @@ public class LinkedList<E> {
         this.next = next;
     }
 
-    public E getElement() {
-        return element;
-    }
+    public E getElement(){return element; }
 
     public void setElement(E element) {
         this.element = element;

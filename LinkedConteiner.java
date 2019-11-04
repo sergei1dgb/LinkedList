@@ -7,9 +7,9 @@ public class LinkedConteiner<E> implements Functions<E> {
     LinkedList<E> first;
     LinkedList<E> last;
     LinkedList<E> node;
-    int count =0;
+    private int count =0;
 
-    public LinkedConteiner(){
+    LinkedConteiner(){
         first = new LinkedList<E>(null, null, last);
         last = new LinkedList<E>(first, null, null);
     }
@@ -35,11 +35,20 @@ public class LinkedConteiner<E> implements Functions<E> {
         s.remove("Sasha54323423");
         s.add("Sasha5");
         s.add("Sergo");
-        for(int i=0; i<s.size(); i++) {
+        for (int i = 0; i < s.size(); i++) {
             System.out.println(s.getElemById(i) + " " + i);
         }
+        s.remove(-1);
+//        s.clear();
+//        for (int i = 0; i < s.size(); i++) {
+//            System.out.println(s.getElemById(i) + " " + i);
+//        }
+//        if (s.size() == 0) {
+//            System.out.println("__________________");
+//            System.out.println("Size of list = " + s.size());
+//            System.out.println("The list is cleared");
+//        }
     }
-
 
     @Override
     public void add(E  element) {
@@ -97,10 +106,7 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public void remove(int i) {
-        if(size()==0){
-            System.out.println("List is empty");
-        }
-        else if(i==size()){
+         if(i==size()){
             System.out.println("This element doesn`t exists");
         }
         else if(size()>0 && i<size()){
@@ -113,13 +119,11 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public void remove(E i) {
-        if(size()==0){
-            System.out.println("List is empty");
-        }
-        else {
+        if(size()>0){
            for(int j = 0; j<size(); j++){
                if(getElemById(j).equals(i)) {
                    remove(j);
+                   j--;
                }
            }
             System.out.println("This element doesn`t exist");
@@ -129,19 +133,30 @@ public class LinkedConteiner<E> implements Functions<E> {
     @Override
     public  E getElemById(int i) {
         LinkedList<E> target =  first.getNext();
-          for(int j = 0; j<i; j++){
+        if(i>=0){
+          for(int j = 0; j<i; j++)
             target = target.getNext();
-        }
+    }
+        else{System.out.println("Index of variable can`t be minus"); }
         return target.getElement();
     }
 
     @Override
     public LinkedList<E> getClassById(int i){
-        LinkedList<E> target = first.getNext();
-        for(int j = 0; j<i; j++){
-            target = target.getNext();
+        LinkedList<E> target =  first.getNext();
+        if(i>=0){
+            for(int j = 0; j<i; j++)
+                target = target.getNext();
         }
+        else{System.out.println("Index of variable can`t be minus"); }
         return target;
+    }
+
+    @Override
+    public void clear() {
+        while(size()>0){
+            remove(0);
+        }
     }
 
     @Override
