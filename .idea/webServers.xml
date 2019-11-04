@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="84c1e8d9-462b-4cd0-9276-4c2773429bfd" name="https://github.com/sergei1dgb/LinkedList" url="https://github.com/sergei1dgb/LinkedList">
+        <fileTransfer port="0" accessType="LOCAL" />
+      </webServer>
+    </option>
+  </component>
+</project>
