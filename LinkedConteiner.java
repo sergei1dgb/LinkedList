@@ -42,7 +42,7 @@ public class LinkedConteiner<E> implements Functions<E> {
 
 
     @Override
-    public void add(E element) {
+    public void add(E  element) {
         if(count==0){
             node = new LinkedList<E>(first,  element, last);
             first.setNext(node);
