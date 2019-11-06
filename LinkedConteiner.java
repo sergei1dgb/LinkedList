@@ -22,6 +22,8 @@ public class LinkedConteiner<E> implements Functions<E> {
         s.add("Sasha3");
         s.add("Sasha4");
         s.add("Sasha5");
+        s.addMiddle(3, "Sergo_Middle");
+        s.addMiddle(8,"qweqw");
         s.addFirst("Sasha2");
         s.add("Sasha6");
         s.addFirst("Sasha0");
@@ -35,24 +37,46 @@ public class LinkedConteiner<E> implements Functions<E> {
         s.remove("Sasha54323423");
         s.add("Sasha5");
         s.add("Sergo");
+
         for (int i = 0; i < s.size(); i++) {
             System.out.println(s.getElemById(i) + " " + i);
         }
+
         s.remove(-1);
-        s.clear();
+        s.removeAll();
+
         for (int i = 0; i < s.size(); i++) {
             System.out.println(s.getElemById(i) + " " + i);
         }
+
         if (s.size() == 0) {
             System.out.println("__________________");
             System.out.println("Size of list = " + s.size());
             System.out.println("The list is cleared");
         }
+
+        s.add("Sergo");
+        s.add("Sergo");
+        s.addFirst("Sergo_First");
+        System.out.println();
+        System.out.println("Getting the element number 2 after adding into the list three elements...");
+        System.out.println(s.getElemById(2));
+
+        if(s.contains("Sergo") == true)
+            System.out.println("The element exists in the list");
+        else
+            System.out.println("The element doesn`t exist in the list");
+
+        s.remove("Sergo");
+        System.out.println("_______________________");
+        System.out.println("Getting the elements after removing element with value 'Sergo'...");
+        for(int i=0; i<s.size(); i++)
+        System.out.println(s.getElemById(i));
     }
 
     @Override
     public void add(E  element) {
-        if(count==0){
+        if(size()==0){
             node = new LinkedList<E>(first,  element, last);
             first.setNext(node);
             last.setPrev(node);
@@ -82,6 +106,10 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public void addMiddle(int i, E element) {
+        if(i<0 || i>size()){
+            System.out.println("This index can`t be used");
+            return;
+        }
         if(size()==0){
             System.out.println("This is a first element for LinkedList");
             node = new LinkedList<E>(first,  element, last);
@@ -92,7 +120,7 @@ public class LinkedConteiner<E> implements Functions<E> {
         else if(size()!=0 && i==0){
             addFirst(element);
         }
-        else if(size()!=0 && i>=size()){
+        else if(size()!=0 && i==size()){
             add(element);
         }
 
@@ -106,15 +134,17 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public void remove(int i) {
-         if(i==size()|| i<0){
-            System.out.println("This element doesn`t exists");
-            return;
-        }
-        else if(size()>0 && i<size()){
-            node = getClassById(i);
-            node.getPrev().setNext(node.getNext());
-            node.getNext().setPrev(node.getPrev());
-            count--;
+        if (size() > 0) {
+            if (i >= size() || i < 0) {
+                System.out.println("This element doesn`t exists");
+            } else if (i < size()) {
+                node = getClassById(i);
+                node.getPrev().setNext(node.getNext());
+                node.getNext().setPrev(node.getPrev());
+                count--;
+            }
+        }else{
+            System.out.println("The list is empty");
         }
     }
 
@@ -136,31 +166,47 @@ public class LinkedConteiner<E> implements Functions<E> {
 
     @Override
     public  E getElemById(int i) {
-        LinkedList<E> target =  first.getNext();
-        if(i>=0){
-          for(int j = 0; j<i; j++)
-            target = target.getNext();
-    }
-        else{System.out.println("Index of variable can`t be minus"); }
+        LinkedList<E> target =  getClassById(i);
         return target.getElement();
     }
 
     @Override
     public LinkedList<E> getClassById(int i){
-        LinkedList<E> target =  first.getNext();
-        if(i>=0){
-            for(int j = 0; j<i; j++)
-                target = target.getNext();
+        LinkedList<E> target = null;
+        if (size() > 0) {
+            target = first.getNext();
+            if (i >= 0 && i < size()) {
+                for (int j = 0; j < i; j++)
+                    target = target.getNext();
+            } else {
+                System.out.println("The element doesn`t exist");
+            }
+        }else{
+            System.out.println("The list is empty");
         }
-        else{System.out.println("Index of variable can`t be minus"); }
         return target;
     }
 
     @Override
-    public void clear() {
+    public void removeAll() {
         while(size()>0){
             remove(0);
         }
+    }
+
+    @Override
+    public boolean contains(E i) {
+        boolean exist = false;
+        if(size()>0){
+            for(int j=0; j<size(); j++){
+                if(getElemById(j).equals(i)){
+                    exist=true;
+                    break;
+            }
+            }
+        }else{exist=false;}
+
+        return exist;
     }
 
     @Override

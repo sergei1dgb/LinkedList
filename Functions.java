@@ -9,6 +9,7 @@ public interface Functions<E> {
     public void remove(E i);
     public  E getElemById(int i);
     public  LinkedList<E> getClassById(int i);
-    public void clear();
+    public void removeAll();
+    public boolean contains(E i);
     public int size();
 }
